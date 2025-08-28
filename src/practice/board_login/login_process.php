@@ -43,10 +43,9 @@ if ($check_result && $check_result->num_rows > 0) {
         // **비교 O -> 세션 생성 + 사용자 정보 저장
         $_SESSION["username"] = $row["username"];
         $_SESSION["name"] = $row["name"];
-        $_SESSION["success"] = "로그인 성공했습니다";
 
         // 5. welcome.php로 이동
-        header("Location: welcome.php");
+        header("Location: list.php");
         exit;
 
         // **비교 X -> login.php로 리디렉션 + 오류 표시

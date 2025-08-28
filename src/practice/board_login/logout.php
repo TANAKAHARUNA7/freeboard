@@ -25,8 +25,5 @@ if (ini_get("session.use_cookies")) {
 session_destroy();
 
 // login.php로 가기
-header("Refresh: 2; URL='login.php'");
+header("Refresh: 2; URL='list.php'");
 echo "로그아웃 중입니다.";
-
-
-?>

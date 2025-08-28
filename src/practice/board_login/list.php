@@ -35,48 +35,60 @@ $row_name = $select_users_result->fetch_assoc();
 
 <body>
     <h1>게시판</h1>
+    <!--     
+    Gest -> 회원가입, 로그인 버튼을 제공
+    User -> 로그인하면 session에 이름, 아이디를 저장하고 화면에 표시 , 
+            로그아웃버튼 제공 
+    -->
+    <?php
+    if (isset($_SESSION["username"]) && isset($_SESSION["name"])) {
+        echo "환영합니다! " . htmlspecialchars($_SESSION["name"]) . "님✨";
+        echo "<a href='logout.php'>로그아웃</a>";
+    } else {
+        echo "안녕하세요Gest님! " . "<br>";
+        echo "<button><a href='register.php'>회원가입</a></button>";
+        echo "<button><a href='login.php'>로그인</a></button>";
+    }
+    ?>
+
+
     <hr>
-    <!-- title
+    <!--
+         title
          name
          content
          조회 수
          작성 날짜
          수정 날짜
-         표시 -->
+         표시 
+    -->
 
     <table border="1">
-        <th>제목</th>
         <th>이름</th>
+        <th>제목</th>
         <th>작성일</th>
         <th>조회수</th>
 
         <!-- whle문을 사용해서 DB내 계시 글을 표시하기
-        $row = $result→fetch_assoc() -->
+            $row = $result→fetch_assoc() -->
+
+        <!-- title에 a테그를 사용해 id 링크하기
+            같이 id를 보함해서 view.php로 이동
+            <a href=’view.php?id=$row[‘id’]’ -->
         <?php
         if ($select_posts_result && $select_posts_result->num_rows > 0) {
             while ($row = $select_posts_result->fetch_assoc()) {
                 echo "<tr>";
-                echo "<td>" . "$row[title]" . "</td>";
                 echo "<td>" . "$row_name[name]" . "</td>";
+                echo "<td>" . "<a href='view.php?id={$row['id']}'>$row[title]</a>" . "</td>";
                 echo "<td>" . "$row[created_at]" . "</td>";
                 echo "</tr>";
             }
         }
         ?>
-
-
-
-
     </table>
-
-
-
-    <!-- title에 a테그를 사용해 id 링크하기
-    같이 id를 보함해서 view.php로 이동
-    <a href=’view.php?id=$row[‘id’]’ -->
-
-
-
+    <br>
+    <button><a href="write.php">글쓰기</a></button>
 
 
 </body>
