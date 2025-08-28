@@ -6,13 +6,13 @@ session_start();
 // ID : userID
 // PW : password
 // Name : name
-$user_id = isset($_POST['userid']) ? trim($_POST['userid']) : '';
+$username = isset($_POST['username']) ? trim($_POST['username']) : '';
 $pw = isset($_POST['pw']) ? trim($_POST['pw']) : '';
 $name = isset($_POST['name']) ? trim($_POST['name']) : '';
 
 // 유호성 검사 (공백)
 // ** 유호하지 않으면 register.php로 리디렉션 + 오류 메시지 표시
-if ($user_id === '' || $pw === '' || $name === '') {
+if ($username === '' || $pw === '' || $name === '') {
     $_SESSION["error"] = "모든 빌드를 입력하세요.";
     header("Location: register.php");
     exit;
@@ -40,7 +40,7 @@ if ($db_conn->connect_errno) {
 }
 
 // 중복된 id 유무를 검사
-$check_sql = "SELECT user_id FROM user WHERE user_id='$user_id'";
+$check_sql = "SELECT username FROM users WHERE username='$username'";
 $check_result = $db_conn->query($check_sql);
 
 // ** 중복되지 않는 경우 
@@ -49,8 +49,8 @@ if($check_result && $check_result->num_rows === 0){
     $pw_hash = password_hash($pw,PASSWORD_DEFAULT);
 
     // 2.DB에 저장INSERT
-    $insert_sql = "INSERT INTO user ( name, user_id, pw) 
-    VALUES ('$name', '$user_id', '$pw_hash')";
+    $insert_sql = "INSERT INTO users ( name, username, pw) 
+    VALUES ('$name', '$username', '$pw_hash')";
 
     $insert_result = $db_conn->query($insert_sql);
 

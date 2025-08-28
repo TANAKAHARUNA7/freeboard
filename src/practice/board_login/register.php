@@ -14,7 +14,7 @@ session_start();
     <?php
     if (isset($_SESSION["error"])) {
         echo htmlspecialchars($_SESSION["error"]);
-        unset($_SESSION["erro"]);
+        unset($_SESSION["error"]);
     };
     ?>
 
@@ -29,12 +29,13 @@ session_start();
             <legend>
                 정보를 입력하세요
             </legend>
-            아이디: <input type="text" name="userid"><br>
+            아이디: <input type="text" name="username"><br>
             비밀번호: <input type="password" name="pw"><br>
             이름: <input type="text" name="name"><br>
             <button>회원가입</button>
         </fieldset>
     </form>
-    
+    <hr>
+    <a href="login.php">로그인</a>
 </body>
 </html>
