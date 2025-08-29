@@ -1,16 +1,30 @@
 <?php
-// session에 아이디 & 이름이 저장되어 있는지 확인
-// 로그인한 User -> 이름 & 아이디 표시
-if (!empty($_SESSION["name"]) && !empty($_SESSION["username"])) {
-    echo "환영합니다! " . 
-         htmlspecialchars($_SESSION["name"]) . "님✨";
-    exit;
-} else {
-    echo "안녕하세요! Gest님! ";
-    echo "<br>";
-    echo "<button><a href='login.php'>로그인</a></button>";
-    echo "<button><a href='register.php'>회원가입</a></button>";
-    exit;
+
+session_start();
+// session에 저장된 사용자 아이디(username)와 이름(name)를
+// 병수에 저장
+$flag = false;
+if (isset($_SESSION["username"]) && isset($_SESSION["name"])){
+    $username = $_SESSION["username"];
+    $name = $_SESSION["name"];
+    $flag = true;
 }
 
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <?php
+    if ($flag) {
+    echo "환연합니다!" .$name ."님✨";
+    } else {
+        echo "안녕하세요! Gest님!";
+    }
+    ?>
+</body>
+</html>

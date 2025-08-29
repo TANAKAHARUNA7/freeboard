@@ -25,13 +25,6 @@ if ($username === '' || $pw === '' || $name === '') {
 // DB 이름
 require_once("./db_conf.php");
 
-$db_conn = new mysqli(
-    db_info::DB_HOST,
-    db_info::DB_USER,
-    db_info::DB_PASSWORD,
-    db_info::DB_NAME
-);
-
 // DB접속 안되면 오류 메시지 출력
 if ($db_conn->connect_errno) {
     $_SESSION["error"] = "DB접속 오류 발생";

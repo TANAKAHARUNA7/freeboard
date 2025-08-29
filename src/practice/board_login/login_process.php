@@ -1,7 +1,8 @@
 <?php
 session_start();
+
 // 1. POST 요청 처리
-// ID : username$username
+// userID : username
 // PW : password
 $username = isset($_POST["username"]) ? trim($_POST["username"]) : '';
 $pw = isset($_POST["pw"]) ? trim($_POST["pw"]) : '';
@@ -16,13 +17,8 @@ if ($username === '' || $pw === '') {
 
 // DB접속
 require_once("./db_conf.php");
-$db_conn = new mysqli(
-    db_info::DB_HOST,
-    db_info::DB_USER,
-    db_info::DB_PASSWORD,
-    db_info::DB_NAME
-);
 
+// 오류발생 시 메시지 출력
 if ($db_conn->connect_errno) {
     $_SESSION["error"] = "DB접속 오류가 발생했습니다.";
     header("Location: login.php");
@@ -43,12 +39,13 @@ if ($check_result && $check_result->num_rows > 0) {
         // **비교 O -> 세션 생성 + 사용자 정보 저장
         $_SESSION["username"] = $row["username"];
         $_SESSION["name"] = $row["name"];
+        $_SESSION["id"] = $row["id"];
         
         // 5. list.php로 이동
-        header("Location: list.php?id={$row["id"]}");
+        header("Location: list.php");
         exit;
 
-        // **비교 X -> login.php로 리디렉션 + 오류 표시
+    // **비교 X -> login.php로 리디렉션 + 오류 표시
     } else {
         $_SESSION["error"] = "비밀번호가 틀렸습니다.";
         header("Location: login.php");

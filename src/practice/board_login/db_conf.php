@@ -1,11 +1,10 @@
 <?php
 
-class db_info {
-    
-    const DB_HOST = "db";
-    const DB_USER = "root";
-    const DB_PASSWORD = "root";
-    const DB_NAME = "freeboard";
-};
+$db_host = "db";
+$db_user = "root";
+$db_pw = "root";
+$db_name = "freeboard";
+
+$db_conn = new mysqli( $db_host, $db_user, $db_pw, $db_name);
 
 ?>

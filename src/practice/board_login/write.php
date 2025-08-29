@@ -1,11 +1,6 @@
 <?php
-session_start();
-
 // session을 사용하고 로그인한 유자인지 확인
-if (isset($_SESSION["name"]) && isset($_SESSION["username"])) {
-    $name = $_SESSION["name"];
-    $username = $_SESSION["username"];
-} 
+require_once("./header.php");
 ?>
 
 
@@ -27,21 +22,20 @@ if (isset($_SESSION["name"]) && isset($_SESSION["username"])) {
 ?>
 
 <h1>게시판 > 글쓰기</h1>
-<?= $name ?> 님✨
 
-<hr>
 <!-- 
     제목/이름/내용/ 입력 form
     ation:write_process.php, method:post -->
     <form action="write_process.php" method="post">
         <fieldset>
+            <input type="hidden" name="id" value="<?php echo $_SESSION['id']; ?>">
             제목: <input type="text" name="title" required><br><br>
             내용: <textarea name="content" rows="5" cols="20" required ></textarea>
         <br><br>    
-        <button>글쓰기</button> 
+        <button>확인</button><button type="reset">초기화</button> 
         </fieldset>
     </form>
-    <br>
+    <hr>
     <button><a href="list.php">돌아가기</a></button>   
 </body>
 </html>
