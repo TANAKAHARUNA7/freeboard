@@ -28,6 +28,7 @@ require_once("./header.php");
     ation:write_process.php, method:post -->
     <form action="write_process.php" method="post">
         <fieldset>
+            <!-- users의 ID와 posts의 userid를 연결하기 외해 -->
             <input type="hidden" name="id" value="<?php echo $_SESSION['id']; ?>">
             제목: <input type="text" name="title" required><br><br>
             내용: <textarea name="content" rows="5" cols="20" required ></textarea>

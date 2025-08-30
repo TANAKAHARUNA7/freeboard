@@ -26,8 +26,8 @@ if ($db_conn->connect_errno) {
 }
 
 // DB에 INSERT
-$insert_sql = "INSERT INTO posts (userid, title, content, created_at) 
-            VALUES ('$id', '$title', '$content', NOW())";
+$insert_sql = "INSERT INTO posts (userid, name, title, content, created_at) 
+            VALUES ('$id', '$_SESSION[name]', '$title', '$content', NOW())";
 $insert_result = $db_conn->query($insert_sql);
 
 // INSERT 성공 시 오류 발생 시 오류메시지 출력

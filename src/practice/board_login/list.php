@@ -5,12 +5,12 @@ require_once("./header.php");
 // 로그인한 User -> 로그인하면 session에 이름와 아이디를
 //                 저장하고 화면에 표시. 로그아웃버튼 제공 
 if ($flag) {
-    echo "<button><a href='logout.php'>로그아웃</a></button>";
+    echo "<a href='logout.php'><button>로그아웃</button></a>";
 // Gest -> 회원가입, 로그인 버튼을 제공.
 } else {
     echo "<br>";
-    echo "<button><a href='login.php'>로그인</a></button>";
-    echo "<button><a href='register.php'>회원가입</a></button>";
+    echo "<a href='login.php'><button>로그인</button></a>";
+    echo "<a href='register.php'><button>회원가입</button></a>";
 }
 
 // login한경우 UserID를 POST로 받는다
@@ -30,9 +30,9 @@ $select_posts_sql = "SELECT * FROM posts ORDER BY id DESC";
 $select_posts_result = $db_conn->query($select_posts_sql);
 
 // 작성자 이름 가져오기
-$select_users_sql = "SELECT * FROM users";
+$select_users_sql = "SELECT name FROM users";
 $select_users_result = $db_conn->query($select_users_sql);
-$row_user = $select_users_result->fetch_assoc();
+$username = $select_users_result->fetch_assoc();
 
 
 
@@ -62,18 +62,16 @@ $row_user = $select_users_result->fetch_assoc();
 
         <!-- whle문을 사용해서 DB내 계시 글을 표시하기
             $row = $result→fetch_assoc() -->
-
-        <!-- title에 a테그를 사용해 id 링크하기
-            같이 id를 보함해서 view.php로 이동
+        <!-- title에 a테그를 사용해 글의 id를 보함해서 view.php로 이동
             <a href=’view.php?id=$row[‘id’]’ -->
         <?php
         if ($select_posts_result && $select_posts_result->num_rows > 0) {
             while ($row = $select_posts_result->fetch_assoc()) {
                 echo "<tr>";
-                echo "<td>" . "$row[id]". "</td>";
-                echo "<td>" . "$row_user[name]" . "</td>";
+                echo "<td>" . "{$row['id']}". "</td>";
+                echo "<td>" . "{$row['name']}" . "</td>";
                 echo "<td>" . "<a href='view.php?id={$row['id']}'>$row[title]</a>" . "</td>";
-                echo "<td>" . "$row[created_at]" . "</td>";
+                echo "<td>" . "{$row['created_at']}" . "</td>";
                 echo "</tr>";
             }
         }
@@ -85,7 +83,7 @@ $row_user = $select_users_result->fetch_assoc();
     <?php
     // 로그인한 User에게 글쓰기버튼 제공
     if ($flag) {
-        echo "<button><a href='write.php'>글쓰기</a></button>";
+        echo "<a href='write.php'><button>글쓰기</button></a>";
     }
     ?>
 

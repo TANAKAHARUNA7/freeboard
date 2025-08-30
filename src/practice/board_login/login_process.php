@@ -36,7 +36,8 @@ $row = $check_result->fetch_assoc();
 if ($check_result && $check_result->num_rows > 0) {
     // password_verify()로 비밀번호 해시값 비교
     if (password_verify($pw, $row["pw"])) {
-        // **비교 O -> 세션 생성 + 사용자 정보 저장
+        // **비교 O -> USER정보 저장
+        // ( username , name, ID )
         $_SESSION["username"] = $row["username"];
         $_SESSION["name"] = $row["name"];
         $_SESSION["id"] = $row["id"];
